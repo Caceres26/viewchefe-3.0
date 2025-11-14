@@ -258,7 +258,12 @@ if (!empty($escola_selecionada) && !$erro_db) {
       <div id="redsAccordion" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           <?php foreach ($reds_data as $red_nome => $metrics): ?>
               <?php
-                  $headerClass = htmlspecialchars($metrics['__header_class'] ?? 'bg-light');
+                  $rawHeaderClass = $metrics['__header_class'] ?? 'bg-light';
+                  $headerClass = htmlspecialchars($rawHeaderClass, ENT_QUOTES, 'UTF-8');
+                  $headerTextClass = preg_match('/\b(bg-light|bg-warning|bg-info|bg-white|bg-body(?:-tertiary)?|bg-secondary-subtle|bg-success-subtle|bg-danger-subtle|bg-warning-subtle|bg-info-subtle|bg-primary-subtle)\b/i', $rawHeaderClass)
+                      ? 'text-dark'
+                      : 'text-white';
+                  $headerTextClassEscaped = htmlspecialchars($headerTextClass, ENT_QUOTES, 'UTF-8');
                   $collapseId = 'resourceCollapse_' . preg_replace('/[^a-z0-9]+/i', '_', strtolower($red_nome));
                   $dataReferencia = $latest_red_date[$red_nome] ?? ($metrics['data_referencia'] ?? null);
                   $dataReferenciaLabel = $dataReferencia ? date('d/m/Y', strtotime($dataReferencia)) : 'N/D';
@@ -279,10 +284,10 @@ if (!empty($escola_selecionada) && !$erro_db) {
               ?>
               <div class="col">
                   <div class="card resource-card h-100 shadow-sm border-0">
-                      <div class="card-header <?= $headerClass; ?> text-white py-2">
+                      <div class="card-header <?= $headerClass; ?> <?= $headerTextClassEscaped; ?> py-2">
                           <div class="d-flex justify-content-between align-items-center gap-2">
                               <button type="button"
-                                      class="resource-title btn btn-link text-white text-start p-0 fw-semibold"
+                                      class="resource-title btn btn-link <?= $headerTextClassEscaped; ?> text-start p-0 fw-semibold"
                                       data-target="#<?= $collapseId; ?>"
                                       aria-expanded="false">
                                   <i class="fas fa-layer-group me-2"></i><?= htmlspecialchars($red_nome); ?>
