@@ -1,0 +1,52 @@
+/* === Rodapé Escuro Estilo Bootstrap === */
+.footer {
+    background-color: var(--bs-body-bg, #212529);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--bs-secondary-color, #adb5bd);
+    font-size: 0.9rem;
+    padding: 1rem 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Links suaves e responsivos */
+.link-footer {
+    color: var(--bs-secondary-color, #adb5bd);
+    text-decoration: none;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.link-footer:hover {
+    color: var(--bs-link-hover-color, #0d6efd);
+    text-shadow: 0 0 6px rgba(13, 110, 253, 0.4);
+}
+
+/* Ícones sutis */
+.footer i {
+    color: var(--bs-secondary-color, #adb5bd);
+    margin-right: 0.25rem;
+    transition: color 0.25s ease;
+}
+
+.footer i:hover {
+    color: var(--bs-link-hover-color, #0d6efd);
+}
+
+/* Animação de aparição elegante */
+.fade-in-footer {
+    opacity: 0;
+    animation: fadeInFooter 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInFooter {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+

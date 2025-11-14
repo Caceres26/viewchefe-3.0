@@ -1,0 +1,87 @@
+/* === Estilo Geral: Dark Theme NextCore === */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: "Inter", "Segoe UI", sans-serif;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* === Card de Login === */
+.card {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+    border: none;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.1);
+    transition: all 0.3s ease;
+    
+    /* Animação */
+    opacity: 0;
+    transform: translateY(40px);
+    animation: cardFadeIn 0.8s ease-out forwards;
+}
+
+/* Efeito hover */
+.card:hover {
+    box-shadow: 0 0 25px rgba(0, 123, 255, 0.25);
+}
+
+/* === Inputs === */
+.form-control {
+    background-color: #2a2a2a;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus {
+    background-color: #252525;
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    color: #fff;
+}
+
+/* === Botão === */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #3399ff;
+    transform: translateY(-1px);
+}
+
+/* === Mensagem de erro === */
+.alert {
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+/* === Rodapé === */
+.text-muted {
+    color: #777 !important;
+}
+
+/* === Animação de entrada === */
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

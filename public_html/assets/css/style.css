@@ -1,0 +1,126 @@
+/* 1. IMPORTAÇÃO DA FONTE (Paleta Equilibrada)
+ * 'Inter' é uma fonte moderna, limpa e altamente legível para dashboards.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+
+:root {
+    /* --- Paleta de Cor Primária (NextCore Blue) --- */
+    --nextcore-primary: #0056b3; /* Um azul corporativo, mais forte que o padrão */
+    
+    /* --- Override do Bootstrap --- */
+    --bs-primary: var(--nextcore-primary);
+    /* RGB correspondente a #0056b3 (para opacidade, ex: bg-primary-subtle) */
+    --bs-primary-rgb: 0, 86, 179; 
+
+    /* --- Override da Fonte Padrão --- */
+    --bs-body-font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    --bs-body-font-size: 0.95rem; /* Ajuste fino para dashboards */
+    --bs-body-font-weight: 400;
+    --bs-body-bg: #f8f9fa; /* Fundo padrão (Light) */
+}
+
+/* 3. APLICAÇÃO DAS VARIÁVEIS DO BOOTSTRAP (Dark Mode)
+ * O Bootstrap 5.3+ trata isto automaticamente com [data-bs-theme="dark"]
+ * Mas podemos forçar o fundo do body em dark mode para garantir.
+ */
+[data-bs-theme="dark"] {
+    /* Fundo principal do modo escuro (um cinza muito escuro) */
+    --bs-body-bg: #1a1a1a;
+}
+
+/* 4. AJUSTES FINOS (Layout e Componentes) */
+
+body {
+    font-family: var(--bs-body-font-family);
+    background-color: var(--bs-body-bg);
+}
+
+/* Torna os números dos KPIs (Cards) mais destacados */
+.card-text.fs-1,
+.card-text.fs-2 {
+    font-weight: 600;
+}
+
+/* Melhora a legibilidade dos cabeçalhos de cards e da marca */
+.card-header,
+.navbar-brand {
+    font-weight: 500;
+}
+
+/* Ajuste do Footer (para ficar no rodapé em páginas curtas) */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main {
+    flex: 1; /* Faz o conteúdo principal "empurrar" o rodapé */
+}
+.footer {
+    flex-shrink: 0; /* Impede que o rodapé encolha */
+}
+
+/* Estilos para a página de Login (substituindo o inline style) */
+.login-page-body {
+    height: 100vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    /* Usa a variável de fundo, que se adapta ao light/dark */
+    background-color: var(--bs-body-bg); 
+}
+
+/* === Navbar Dark - Estilo Bootstrap NextCore === */
+.navbar-dark {
+    background-color: var(--bs-body-bg, #212529) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Marca NextCore */
+.navbar-brand {
+    color: var(--bs-light, #f8f9fa) !important;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: var(--bs-link-hover-color, #0d6efd) !important;
+    text-shadow: 0 0 8px rgba(13, 110, 253, 0.5);
+}
+
+/* Links de navegação */
+.navbar-dark .nav-link {
+    color: var(--bs-secondary-color, #adb5bd) !important;
+    margin-right: 0.75rem;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.navbar-dark .nav-link:hover,
+.navbar-dark .nav-link.active {
+    color: var(--bs-link-hover-color, #0d6efd) !important;
+    text-shadow: 0 0 6px rgba(13, 110, 253, 0.4);
+}
+
+/* Usuário logado */
+.navbar-text {
+    color: #9ca3af !important;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+/* Botão Sair */
+.btn-outline-light {
+    color: #f8f9fa;
+    border-color: rgba(255, 255, 255, 0.3);
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.btn-outline-light:hover {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
