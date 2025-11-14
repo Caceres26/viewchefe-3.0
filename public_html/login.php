@@ -73,13 +73,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acesso Restrito | NextCore: Sistema de Métricas</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="assets/css/login.css" rel="stylesheet"> 
+    <script>
+        (function () {
+            const storageKey = 'nextcore-theme';
+            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            let storageAvailable = true;
+            try {
+                localStorage.setItem('__t', '1');
+                localStorage.removeItem('__t');
+            } catch (e) {
+                storageAvailable = false;
+            }
+
+            const getStored = () => storageAvailable ? localStorage.getItem(storageKey) : null;
+            const resolve = (value) => (value === 'light' || value === 'dark')
+                ? value
+                : (mediaQuery.matches ? 'dark' : 'light');
+
+            const apply = (value) => {
+                const choice = (value === 'light' || value === 'dark') ? value : 'auto';
+                const resolved = resolve(value);
+                document.documentElement.setAttribute('data-bs-theme', resolved);
+                document.documentElement.setAttribute('data-theme-choice', choice);
+            };
+
+            apply(getStored() ?? 'auto');
+
+            const handleSystemChange = () => {
+                const choice = document.documentElement.getAttribute('data-theme-choice') || 'auto';
+                if (choice === 'auto') {
+                    apply('auto');
+                }
+            };
+
+            mediaQuery.addEventListener
+                ? mediaQuery.addEventListener('change', handleSystemChange)
+                : mediaQuery.addListener && mediaQuery.addListener(handleSystemChange);
+        })();
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="assets/css/login.css" rel="stylesheet">
 </head>
 <body class="login-page-body">
-    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
+    <div class="card login-card shadow-lg p-4" style="width: 100%; max-width: 400px;">
         <h4 class="card-title text-center mb-4">Acesso ao Sistema</h4>
-        
+
         <?php if ($mensagem_erro): ?>
             <div class="alert alert-danger" role="alert">
                 <?php echo $mensagem_erro; ?>
@@ -99,6 +137,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
         <p class="mt-3 text-center text-muted"><small>&copy; <?php echo date('Y'); ?> NextCore: Digital Solutions</small></p>
     </div>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
